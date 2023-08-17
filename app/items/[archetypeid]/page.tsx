@@ -19,13 +19,13 @@ export default function Item({
         accessorKey: "issuedId", //simple recommended way to define a column
         header: "issuedId",
         muiTableHeadCellProps: { sx: { color: "gray" } }, //custom props
-        Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong>, //optional custom cell render
+        Cell: ({ renderedCellValue }: { renderedCellValue: number }) => <strong>{renderedCellValue}</strong>, //optional custom cell render
       },
       {
         accessorKey: "ownerName", //simple recommended way to define a column
         header: "Owner",
         muiTableHeadCellProps: { sx: { color: "skyblue" } }, //custom props
-        Cell: ({ renderedCellValue }) => (
+        Cell: ({ renderedCellValue }: { renderedCellValue: string }) => (
           <Link href={`/users/${encodeURIComponent(renderedCellValue)}`}>
             {renderedCellValue}
           </Link>

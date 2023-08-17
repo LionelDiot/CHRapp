@@ -1,5 +1,5 @@
-import prisma from "../../lib/prisma";
 
+import prisma from "../../lib/prisma";
 import Table from "../../components/table/Table";
 import React from "react";
 import Link from "next/link";
@@ -9,14 +9,14 @@ import Link from "next/link";
 export default async function  Users() {
   let users = await prisma.user.findMany();
 
-  users = JSON.parse(JSON.stringify(users));
+  users = await JSON.parse(JSON.stringify(users));
 
   const columns = [
       {
         accessorKey: "id",
         header: "ID",
         muiTableHeadCellProps: { sx: { color: "gray" } },
-        Cell: ({ renderedCellValue }) => {
+        Cell: ({ renderedCellValue }: { renderedCellValue: number }) => {
           return renderedCellValue;
         },
       },
@@ -24,7 +24,7 @@ export default async function  Users() {
         accessorKey: "name", //simple recommended way to define a column
         header: "Name",
         muiTableHeadCellProps: { sx: { color: "grey" } }, //custom props
-        Cell: ({ cell, renderedCellValue }) => (
+        Cell: ({ cell, renderedCellValue }: { renderedCellValue: string, cell: any }) => (
           <Link href={`/users/${encodeURIComponent(cell.getValue())}`}>
             {renderedCellValue}
           </Link>
@@ -34,7 +34,7 @@ export default async function  Users() {
         accessorKey: "sold", //simple recommended way to define a column
         header: "Sales $",
         muiTableHeadCellProps: { sx: { color: "green" } }, //custom props
-        Cell: ({ renderedCellValue }) => (
+        Cell: ({ renderedCellValue }: { renderedCellValue: number }) => (
           <strong>
             {Number(renderedCellValue.toFixed(2)).toLocaleString()}
           </strong>
@@ -44,7 +44,7 @@ export default async function  Users() {
         accessorKey: "spent", //simple recommended way to define a column
         header: "Purchases $",
         muiTableHeadCellProps: { sx: { color: "red" } }, //custom props
-        Cell: ({ renderedCellValue }) => (
+        Cell: ({ renderedCellValue }: { renderedCellValue: number }) => (
           <strong>
             {Number(renderedCellValue.toFixed(2)).toLocaleString()}
           </strong>
@@ -54,7 +54,7 @@ export default async function  Users() {
         accessorKey: "balance", //simple recommended way to define a column
         header: "Balance",
         muiTableHeadCellProps: { sx: { color: "skyblue" } }, //custom props
-        Cell: ({ renderedCellValue }) => (
+        Cell: ({ renderedCellValue }: { renderedCellValue: number }) => (
           <strong>
             {Number(renderedCellValue.toFixed(2)).toLocaleString()}
           </strong>

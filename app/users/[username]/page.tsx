@@ -14,7 +14,7 @@ export default function User({
         accessorKey: "archetypeId", //simple recommended way to define a column
         header: "ID",
         muiTableHeadCellProps: { sx: { color: "black" } }, //custom props
-        Cell: ({ renderedCellValue }) => (
+        Cell: ({ renderedCellValue }: { renderedCellValue: number }) => (
           <Link href={`/items/${encodeURIComponent(renderedCellValue)}`}>
             {renderedCellValue}
           </Link>
@@ -24,13 +24,13 @@ export default function User({
         accessorKey: "item.name", //simple recommended way to define a column
         header: "Item Name",
         muiTableHeadCellProps: { sx: { color: "grey" } }, //custom props
-        Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong>, //optional custom cell render
+        Cell: ({ renderedCellValue }: { renderedCellValue: string }) => <strong>{renderedCellValue}</strong>, //optional custom cell render
       },
       {
         accessorKey: "item.floorPrice", //simple recommended way to define a column
         header: "FloorPrice $",
         muiTableHeadCellProps: { sx: { color: "red" } }, //custom props
-        Cell: ({ renderedCellValue }) => (
+        Cell: ({ renderedCellValue }: { renderedCellValue: number }) => (
           <strong>
             {Number(renderedCellValue.toFixed(2)).toLocaleString()}
           </strong>
@@ -40,20 +40,20 @@ export default function User({
         accessorKey: "item.rarityName", //simple recommended way to define a column
         header: "Rarity",
         muiTableHeadCellProps: { sx: { color: "blue" } }, //custom props
-        Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong>, //optional custom cell render
+        Cell: ({ renderedCellValue }: { renderedCellValue: string }) => <strong>{renderedCellValue}</strong>, //optional custom cell render
       },
       {
         accessorKey: "item.maxIssuance", //simple recommended way to define a column
         header: "Max Issuance",
         muiTableHeadCellProps: { sx: { color: "green" } }, //custom props
-        Cell: ({ renderedCellValue }) => <strong>{renderedCellValue}</strong>, //optional custom cell render
+        Cell: ({ renderedCellValue }: { renderedCellValue: number }) => <strong>{renderedCellValue}</strong>, //optional custom cell render
       },
     ],
     []
   );
 
   // Calculate the sum of floorPrice values for all NFTs
-  let sumFloorPrice = user.nfts.reduce((total, nft) => {
+  let sumFloorPrice = user.nfts.reduce(({total, nft}: { total: number, nft: any }) => {
     return total + (nft.item?.floorPrice || 0);
   }, 0);
 

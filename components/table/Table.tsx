@@ -4,7 +4,7 @@ import { MaterialReactTable } from "material-react-table";
 import tableHeader from "./tableHeader.module.scss";
 import Link from "next/link";
 
-const Table = ({ viewName, columns, data }) => {
+const Table = ({ viewName, columns, data }: { viewName: string, columns: any, data: any }) => {
   // const darkTheme = createTheme({
   //   palette: {
   //     mode: "dark",
